@@ -1,6 +1,6 @@
 {
   "name": "clashofclans-army",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Get random Clash of Clans troop",
   "main": "src/index.js",
   "scripts": {
@@ -10,11 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/chgasparoto/clashofclans-army.git"
   },
-  "keywords": [
-    "random",
-    "clash of clans"
-  ],
-  "author": "Cleber Gasparoto <chgasparoto@gmail.com> (https://github.com/chgasparoto)",
+  "keywords": ["random", "clash of clans"],
+  "author":
+    "Cleber Gasparoto <chgasparoto@gmail.com> (https://github.com/chgasparoto)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chgasparoto/clashofclans-army/issues"
