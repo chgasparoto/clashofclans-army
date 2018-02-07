@@ -8,8 +8,9 @@ node_js:
   - '8'
   - '6'
 scripts:
-  - npm run test
+  - npm run cover
   - npm run check-coverage
+  - npm run build
 after_success:
   - npm run travis-deploy-once "npm run report-coverage"
   - npm run travis-deploy-once "npm run semantic-release"

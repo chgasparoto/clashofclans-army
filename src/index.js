@@ -1,5 +1,5 @@
-const clashOfClansArmy = require('./clashofclans-army.json');
-const uniqueRandomArray = require('unique-random-array');
+import uniqueRandomArray from 'unique-random-array';
+import clashOfClansArmy from './clashofclans-army.json';
 
 const randomItem = uniqueRandomArray(clashOfClansArmy);
 

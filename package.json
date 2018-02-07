@@ -2,24 +2,35 @@
   "name": "clashofclans-army",
   "version": "0.0.0-development",
   "description": "Get random Clash of Clans troop",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "istanbul cover -x *.test.js _mocha -- -R spec src/index.test.js",
-    "test:watch": "mocha src/index.test.js -w",
+    "test": "mocha src/index.test.js --compilers js:babel-register",
+    "cover": "nyc npm t",
+    "test:watch": "npm t -- -w",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once",
     "commit": "git-cz",
-    "check-coverage":
-      "istanbul check-coverage --statements 100 --branches 100 --function 100 --lines 100",
-    "report-coverage": "cat ./coverage/lcov.info | codecov"
+    "check-coverage": "nyc check-coverage --statements 100 --branches 100 --function 100 --lines 100",
+    "report-coverage": "cat ./coverage/lcov.info | codecov",
+    "prebuild": "rimraf dist",
+    "build": "npm-run-all --parallel build:*",
+    "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
+    "build:umd": "webpack --output-filename index.umd.js",
+    "build:umd.min": "webpack --output-filename index.umd.min.js -p"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/chgasparoto/clashofclans-army.git"
   },
-  "keywords": ["random", "clash of clans"],
-  "author":
-    "Cleber Gasparoto <chgasparoto@gmail.com> (https://github.com/chgasparoto)",
+  "keywords": [
+    "random",
+    "clash of clans"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "author": "Cleber Gasparoto <chgasparoto@gmail.com> (https://github.com/chgasparoto)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chgasparoto/clashofclans-army/issues"
@@ -29,22 +40,29 @@
     "unique-random-array": "1.0.0"
   },
   "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-preset-es2015": "6.24.1",
     "chai": "4.1.2",
     "codecov.io": "0.1.6",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.1.0",
     "ghooks": "2.0.2",
-    "istanbul": "0.4.5",
+    "json-loader": "0.5.7",
     "mocha": "5.0.0",
+    "npm-run-all": "4.1.2",
+    "nyc": "11.4.1",
+    "rimraf": "2.6.2",
     "semantic-release": "^12.4.1",
-    "travis-deploy-once": "^4.3.4"
+    "travis-deploy-once": "^4.3.4",
+    "webpack": "3.10.0"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     },
     "ghooks": {
-      "pre-commit": "npm run test && npm run check-coverage"
+      "pre-commit": "npm run cover && npm run check-coverage"
     }
   }
 }

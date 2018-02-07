@@ -1,5 +1,5 @@
-const expect = require('chai').expect;
-const clashOfClans = require('./index');
+import { expect } from 'chai';
+import clashOfClans from './index';
 
 describe('clashofclans-army', function() {
   describe('all', function() {
