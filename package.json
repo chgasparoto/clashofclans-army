@@ -4,11 +4,14 @@
   "description": "Get random Clash of Clans troop",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha src/index.test.js",
-    "test:watch": "npm run test -- -w",
+    "test": "istanbul cover -x *.test.js _mocha -- -R spec src/index.test.js",
+    "test:watch": "mocha src/index.test.js -w",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "check-coverage":
+      "istanbul check-coverage --statements 100 --branches 100 --function 100 --lines 100",
+    "report-coverage": "cat ./coverage/lcov.info | codecov"
   },
   "repository": {
     "type": "git",
@@ -27,9 +30,11 @@
   },
   "devDependencies": {
     "chai": "4.1.2",
+    "codecov.io": "0.1.6",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.1.0",
     "ghooks": "2.0.2",
+    "istanbul": "0.4.5",
     "mocha": "5.0.0",
     "semantic-release": "^12.4.1",
     "travis-deploy-once": "^4.3.4"
@@ -39,7 +44,7 @@
       "path": "node_modules/cz-conventional-changelog"
     },
     "ghooks": {
-      "pre-commit": "npm run test"
+      "pre-commit": "npm run test && npm run check-coverage"
     }
   }
 }
