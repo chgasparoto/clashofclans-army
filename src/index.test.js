@@ -19,9 +19,18 @@ describe('clashofclans-army', function() {
   });
 
   describe('random', function() {
-    it('should contain a random element from clashOfClans.all', function() {
-      const troop = clashOfClans.random();
-      expect(clashOfClans.all).to.include(troop);
+    it('should return a random item from clashOfClans.all', function() {
+      const randomItem = clashOfClans.random();
+      expect(clashOfClans.all).to.include(randomItem);
+    });
+
+    it('should return an array of random items if passed number', function() {
+      const randomItems = clashOfClans.random(3);
+      expect(randomItems).to.have.length(3);
+
+      randomItems.forEach(function(item) {
+        expect(clashOfClans.all).to.include(item);
+      });
     });
   });
 });
